@@ -43,17 +43,14 @@ public class Main extends JFrame{
         add(menuBar, BorderLayout.NORTH);
 
         DataPanel data = new DataPanel();
-        DataPanel data2 = new DataPanel();
 
         add(data, BorderLayout.CENTER);
 
         GridLayout fileGrid = new GridLayout(11, 1);
         JPanel filePanel = new JPanel(fileGrid);
 
-        for(int i = 0; i < 11; i++){
-            JTextField file = new JTextField("File " + (i + 1));
-            filePanel.add(file);
-        }
+        JPanel fileOpener = new JPanel(new GridLayout(20, 1));
+
         add(filePanel, BorderLayout.WEST);
 
 
