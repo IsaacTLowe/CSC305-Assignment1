@@ -1,64 +1,32 @@
 import javax.swing.*;
 import java.awt.*;
 
+public class Main extends JFrame {
 
-public class Main extends JFrame{
+    private Blackboard blackboard = new Blackboard();
+    private DataPanel dataPanel = new DataPanel(blackboard);
+    private FileListPanel fileListPanel = new FileListPanel();
+    private JLabel statusBar = new JLabel("status");
 
-    public static void main(){
-        Main frame = new Main();
-        frame.setTitle("Title");
-        frame.setSize(1000, 500);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(Main::new);
     }
 
-    public Main(){
-        BorderLayout layout = new BorderLayout();
-        setLayout(layout);
+    public Main() {
+        setTitle("Window Title");
+        setSize(1000, 700);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menuFile = new JMenu("Menu File");
-        JMenu menuAction = new JMenu("Menu Action");
-        JMenu menuHelp = new JMenu("Menu Help");
+        // Menus
+        JMenuBar menuBar = new MenuBarController(this, fileListPanel, dataPanel, blackboard, statusBar).createMenuBar();
+        setJMenuBar(menuBar);
 
-        JMenuItem open = new JMenuItem("Open");
-        JMenuItem exit = new JMenuItem("Exit");
+        // Layout regions
+        add(fileListPanel, BorderLayout.WEST);
+        add(dataPanel, BorderLayout.CENTER);
+        add(statusBar, BorderLayout.SOUTH);
 
-        JMenuItem run = new JMenuItem("Run");
-
-        JMenuItem about = new JMenuItem("About");
-
-        menuFile.add(open);
-        menuFile.add(exit);
-
-        menuAction.add(run);
-
-        menuHelp.add(about);
-
-        menuBar.add(menuFile);
-        menuBar.add(menuAction);
-        menuBar.add(menuHelp);
-
-        add(menuBar, BorderLayout.NORTH);
-
-        DataPanel data = new DataPanel();
-
-        add(data, BorderLayout.CENTER);
-
-        GridLayout fileGrid = new GridLayout(11, 1);
-        JPanel filePanel = new JPanel(fileGrid);
-
-        JPanel fileOpener = new JPanel(new GridLayout(20, 1));
-
-        add(filePanel, BorderLayout.WEST);
-
-
-        JLabel status = new JLabel("status");
-        add(status, BorderLayout.SOUTH);
-
-
+        setVisible(true);
     }
-
-
 }
