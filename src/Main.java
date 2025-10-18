@@ -43,6 +43,7 @@ public class Main extends JFrame{
         add(menuBar, BorderLayout.NORTH);
 
         DataPanel data = new DataPanel();
+        DataPanel data2 = new DataPanel();
 
         add(data, BorderLayout.CENTER);
 
