@@ -13,8 +13,8 @@ public class DataPanel extends JPanel {
         super.paintComponent(g);
         g.setFont(new Font("SansSerif", Font.PLAIN, 16));
         g.setColor(Color.BLACK);
-        g.drawString("Complexity", 100, 50);
-        g.drawString("Size", 300, 50);
+        g.drawString("Complexity: " + blackboard.getComplexity(), 100, 50);
+        g.drawString("Size:" + blackboard.getSize(), 300, 50);
         g.drawString("Overall", 600, 50);
 
         drawBars(g);
@@ -24,30 +24,41 @@ public class DataPanel extends JPanel {
     private void drawBars(Graphics g) {
         int complexity = blackboard.getComplexity();
         int size = blackboard.getSize();
+        int maxVal = 250;
 
-        g.setColor(Color.PINK);
-        g.fillRect(100, 300 - complexity * 10, 50, complexity * 10);
+        double complexityScale = 500.0 / maxVal;
+        double sizeScale = 250.0 / maxVal;
 
-        g.setColor(new Color(255, 180, 255));
-        g.fillRect(300, 300 - size / 5, 50, size / 5);
+        int complexityHeight = (int) (complexity * complexityScale);
+        g.setColor(Color.BLUE);
+        g.fillRect(100, 300 - complexityHeight, 50, complexityHeight);
+
+        int sizeHeight = (int) (size * sizeScale);
+        g.setColor(Color.GREEN);
+        g.fillRect(300, 300 - sizeHeight, 50, sizeHeight);
     }
 
     private void drawFace(Graphics g) {
         boolean happy = blackboard.isHappy();
-        g.setColor(Color.GREEN);
-        if(happy) {
-            g.setColor(Color.GREEN);
-        } else {
-            g.setColor(Color.RED);
-        }
-        g.fillOval(580, 100, 100, 100);
+
         g.setColor(Color.BLACK);
         g.drawOval(580, 100, 100, 100);
+
+        if (happy) {
+            g.setColor(Color.GREEN);
+            g.fillOval(580, 100, 100, 100);
+        } else if (!happy) {
+            g.setColor(Color.RED);
+            g.fillOval(580, 100, 100, 100);
+        }
+
+        g.setColor(Color.BLACK);
         g.fillOval(600, 130, 10, 10);
         g.fillOval(650, 130, 10, 10);
+
         if (happy) {
             g.drawArc(600, 150, 50, 20, 180, 180);
-        }else {
+        } else {
             g.drawArc(600, 160, 50, 20, 0, 180);
         }
     }
