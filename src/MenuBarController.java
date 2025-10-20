@@ -3,50 +3,28 @@ import java.awt.event.*;
 import java.io.*;
 
 public class MenuBarController {
-    private JFrame parent;
-    private FileListPanel fileListPanel;
-    private DataPanel dataPanel;
-    private Blackboard blackboard;
-    private JLabel statusBar;
     private File currentFolder;
 
-    public MenuBarController(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel,
-                             Blackboard blackboard, JLabel statusBar) {
-        this.parent = parent;
-        this.fileListPanel = fileListPanel;
-        this.dataPanel = dataPanel;
-        this.blackboard = blackboard;
-        this.statusBar = statusBar;
-    }
-
-    public JMenuBar createMenuBar() {
+    public JMenuBar createMenuBar(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel, Blackboard blackboard, JLabel statusBar) {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
         JMenuItem openItem = new JMenuItem("Open Folder");
         JMenuItem exitItem = new JMenuItem("Exit");
 
+        openItem.addActionListener(e -> openFolder(parent, fileListPanel, statusBar));
+        exitItem.addActionListener(e -> System.exit(0));
+        fileMenu.add(openItem);
+        fileMenu.add(exitItem);
+
         JMenu actionMenu = new JMenu("Action");
         JMenuItem runItem = new JMenuItem("Run");
+        runItem.addActionListener(e -> runAnalysis(parent, fileListPanel, dataPanel, blackboard, statusBar));
+        actionMenu.add(runItem);
 
         JMenu helpMenu = new JMenu("Help");
         JMenuItem aboutItem = new JMenuItem("About");
-
-        // File actions
-        openItem.addActionListener(e -> openFolder());
-        exitItem.addActionListener(e -> System.exit(0));
-
-        // Run action
-        runItem.addActionListener(e -> runAnalysis());
-
-        // Help
-        aboutItem.addActionListener(e ->
-                JOptionPane.showMessageDialog(parent, "Code Analyzer\nCreated by: Your Name"));
-
-        // Assemble menus
-        fileMenu.add(openItem);
-        fileMenu.add(exitItem);
-        actionMenu.add(runItem);
+        aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(parent, "Code Analyzer\nCreated by: Isaac and Emmy"));
         helpMenu.add(aboutItem);
 
         menuBar.add(fileMenu);
@@ -56,7 +34,7 @@ public class MenuBarController {
         return menuBar;
     }
 
-    private void openFolder() {
+    private void openFolder(JFrame parent, FileListPanel fileListPanel, JLabel statusBar) {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
@@ -68,7 +46,7 @@ public class MenuBarController {
         }
     }
 
-    private void runAnalysis() {
+    private void runAnalysis(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel, Blackboard blackboard, JLabel statusBar) {
         String selectedFile = fileListPanel.getSelectedFileName();
         if (selectedFile == null || currentFolder == null) {
             JOptionPane.showMessageDialog(parent, "Please select a file first.");

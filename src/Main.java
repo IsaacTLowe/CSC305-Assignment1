@@ -17,7 +17,7 @@ public class Main extends JFrame {
         setLayout(new BorderLayout());
 
         // Menus
-        JMenuBar menuBar = new MenuBarController(this, fileListPanel, dataPanel, blackboard, statusBar).createMenuBar();
+        JMenuBar menuBar = new MenuBarController().createMenuBar(this, fileListPanel, dataPanel, blackboard, statusBar);
         setJMenuBar(menuBar);
 
         // Layout regions
