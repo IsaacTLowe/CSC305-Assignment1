@@ -2,12 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The main entry point for the Code Analyzer application.
- * <p>
- * This class creates the main window, initializes all panels,
- * and sets up the menu bar controller to handle user actions.
- * </p>
- *
  * @author Emmy Harris and Isaac Lowe
  * @version 1.0
  * @since 2025-10-20
@@ -28,7 +22,7 @@ public class Main extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        JMenuBar menuBar = new MenuBarController().createMenuBar(this, fileListPanel, dataPanel, blackboard, statusBar);
+        JMenuBar menuBar = new MenuBarController(this, fileListPanel, dataPanel, blackboard, statusBar).createMenuBar();
         setJMenuBar(menuBar);
 
         add(fileListPanel, BorderLayout.WEST);

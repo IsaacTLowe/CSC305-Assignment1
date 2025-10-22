@@ -4,22 +4,35 @@ import java.io.*;
 
 public class MenuBarController {
     private File currentFolder;
+    private JFrame parent;
+    private FileListPanel fileListPanel;
+    private DataPanel dataPanel;
+    private Blackboard blackboard;
+    private JLabel statusBar;
 
-    public JMenuBar createMenuBar(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel, Blackboard blackboard, JLabel statusBar) {
+    public MenuBarController(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel, Blackboard blackboard, JLabel statusBar) {
+        this.parent = parent;
+        this.fileListPanel = fileListPanel;
+        this.dataPanel = dataPanel;
+        this.blackboard = blackboard;
+        this.statusBar = statusBar;
+    }
+
+    public JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
         JMenuItem openItem = new JMenuItem("Open Folder");
         JMenuItem exitItem = new JMenuItem("Exit");
 
-        openItem.addActionListener(e -> openFolder(parent, fileListPanel, statusBar));
+        openItem.addActionListener(e -> openFolder());
         exitItem.addActionListener(e -> System.exit(0));
         fileMenu.add(openItem);
         fileMenu.add(exitItem);
 
         JMenu actionMenu = new JMenu("Action");
         JMenuItem runItem = new JMenuItem("Run");
-        runItem.addActionListener(e -> runAnalysis(parent, fileListPanel, dataPanel, blackboard, statusBar));
+        runItem.addActionListener(e -> runAnalysis());
         actionMenu.add(runItem);
 
         JMenu helpMenu = new JMenu("Help");
@@ -34,7 +47,7 @@ public class MenuBarController {
         return menuBar;
     }
 
-    private void openFolder(JFrame parent, FileListPanel fileListPanel, JLabel statusBar) {
+    private void openFolder() {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
@@ -46,7 +59,7 @@ public class MenuBarController {
         }
     }
 
-    private void runAnalysis(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel, Blackboard blackboard, JLabel statusBar) {
+    private void runAnalysis() {
         String selectedFile = fileListPanel.getSelectedFileName();
         if (selectedFile == null || currentFolder == null) {
             JOptionPane.showMessageDialog(parent, "Please select a file first.");
