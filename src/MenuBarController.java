@@ -32,18 +32,14 @@ public class MenuBarController {
         JMenu helpMenu = new JMenu("Help");
         JMenuItem aboutItem = new JMenuItem("About");
 
-        // File actions
         openItem.addActionListener(e -> openFolder());
         exitItem.addActionListener(e -> System.exit(0));
 
-        // Run action
         runItem.addActionListener(e -> runAnalysis());
 
-        // Help
         aboutItem.addActionListener(e ->
                 JOptionPane.showMessageDialog(parent, "Code Analyzer\nCreated by: Your Name"));
 
-        // Assemble menus
         fileMenu.add(openItem);
         fileMenu.add(exitItem);
         actionMenu.add(runItem);

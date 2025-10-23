@@ -3,9 +3,7 @@ public class Blackboard {
     private int complexity;
     private boolean happy;
 
-    public int getSize() {
-        return size;
-    }
+    public int getSize() { return size; }
 
     public int getComplexity() {
         return complexity;
