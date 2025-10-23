@@ -16,11 +16,9 @@ public class Main extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Menus
         JMenuBar menuBar = new MenuBarController(this, fileListPanel, dataPanel, blackboard, statusBar).createMenuBar();
         setJMenuBar(menuBar);
 
-        // Layout regions
         add(fileListPanel, BorderLayout.WEST);
         add(dataPanel, BorderLayout.CENTER);
         add(statusBar, BorderLayout.SOUTH);
