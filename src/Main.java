@@ -2,9 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author Emmy Harris and Isaac Lowe
+ * The main class that starts the application.
+ * It creates the main window and sets up the menu bar,
+ * panels, and status bar for the user interface.
+ *
+ * @author Emily Harris
+ * @author Isaac Lowe
  * @version 1.0
- * @since 2025-10-20
  */
 
 public class Main extends JFrame {

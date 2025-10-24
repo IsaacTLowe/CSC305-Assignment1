@@ -1,6 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Displays analysis results visually using bars and a face indicator.
+ * Shows file complexity, size, and overall status based on the Blackboard data.
+ *
+ * @author Emily Harris
+ * @author Isaac Lowe
+ * @version 1.0
+ */
+
 public class DataPanel extends JPanel {
     private Blackboard blackboard;
 

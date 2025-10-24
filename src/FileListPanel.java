@@ -2,6 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Displays a list of Java files from a selected folder.
+ * Allows the user to select a file to be analyzed.
+ *
+ * @author Emily Harris
+ * @author Isaac Lowe
+ * @version 1.0
+ */
+
 public class FileListPanel extends JPanel {
     private DefaultListModel<String> model = new DefaultListModel<>();
     private JList<String> fileList = new JList<>(model);

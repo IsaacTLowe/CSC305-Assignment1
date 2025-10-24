@@ -2,6 +2,16 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.List;
 
+/**
+ * Analyzes a Java file to measure its size, complexity,
+ * and presence of author and version tags.
+ * Updates the given {@code Blackboard} with the results.
+ *
+ * @author Emily Harris
+ * @author Isaac Lowe
+ * @version 1.0
+ */
+
 public class FileAnalyzer {
 
     public static void analyze(File file, Blackboard board) {

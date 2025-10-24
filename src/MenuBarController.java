@@ -2,15 +2,26 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 
+/**
+ * Handles the creation and control of the menu bar.
+ * Manages user actions such as opening folders, running analysis,
+ * and displaying information about the program.
+ *
+ * @author Emily Harris
+ * @author Isaac Lowe
+ * @version 1.0
+ */
+
 public class MenuBarController {
-    private File currentFolder;
     private JFrame parent;
     private FileListPanel fileListPanel;
     private DataPanel dataPanel;
     private Blackboard blackboard;
     private JLabel statusBar;
+    private File currentFolder;
 
-    public MenuBarController(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel, Blackboard blackboard, JLabel statusBar) {
+    public MenuBarController(JFrame parent, FileListPanel fileListPanel, DataPanel dataPanel,
+                             Blackboard blackboard, JLabel statusBar) {
         this.parent = parent;
         this.fileListPanel = fileListPanel;
         this.dataPanel = dataPanel;
@@ -25,19 +36,23 @@ public class MenuBarController {
         JMenuItem openItem = new JMenuItem("Open Folder");
         JMenuItem exitItem = new JMenuItem("Exit");
 
-        openItem.addActionListener(e -> openFolder());
-        exitItem.addActionListener(e -> System.exit(0));
-        fileMenu.add(openItem);
-        fileMenu.add(exitItem);
-
         JMenu actionMenu = new JMenu("Action");
         JMenuItem runItem = new JMenuItem("Run");
-        runItem.addActionListener(e -> runAnalysis());
-        actionMenu.add(runItem);
 
         JMenu helpMenu = new JMenu("Help");
         JMenuItem aboutItem = new JMenuItem("About");
-        aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(parent, "Code Analyzer\nCreated by: Isaac and Emmy"));
+
+        openItem.addActionListener(e -> openFolder());
+        exitItem.addActionListener(e -> System.exit(0));
+
+        runItem.addActionListener(e -> runAnalysis());
+
+        aboutItem.addActionListener(e ->
+                JOptionPane.showMessageDialog(parent, "Code Analyzer\nCreated by: Your Name"));
+
+        fileMenu.add(openItem);
+        fileMenu.add(exitItem);
+        actionMenu.add(runItem);
         helpMenu.add(aboutItem);
 
         menuBar.add(fileMenu);
